@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Intrusion-Detection-System</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+<h1 >Intrusion-Detection-System</h1>
+ <div  class="login" id="contact-form">
+
+     <br>
+     <br>
+     <b> Saisir les caractérisques du intrusion-detection pour connaitre sa classe: </b>
+ <br>
+ 
+     <br>
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+<input type="text" name="sbytes" placeholder="sbytes" required="required" />
+<input type="text" name="dbytes" placeholder="dbytes" required="required" />
+<input type="text" name="rate" placeholder="rate" required="required" />
+<input type="text" name="sload" placeholder="sload" required="required" />
+<input type="text" name="dload" placeholder="dload" required="required" />
+<input type="text" name="sinpkt" placeholder="sinpkt" required="required" />
+<input type="text" name="dinpkt" placeholder="dinpkt" required="required" />
+<input type="text" name="djit" placeholder="djit" required="required" />
+<input type="text" name="stcpb" placeholder="stcpb" required="required" />
+<input type="text" name="dtcpb" placeholder="dtcpb" required="required" />
+<input type="text" name="tcprtt" placeholder="tcprtt" required="required" />
+<input type="text" name="synack" placeholder="synack" required="required" />
+<input type="text" name="ackdat" placeholder="ackdat" required="required" />
+<input type="text" name="smean" placeholder="smean" required="required" />
+<input type="text" name="dmean" placeholder="dmean" required="required" />
+<input type="text" name="ct_src_dport_ltm" placeholder="ct_src_dport_ltm" required="required" />
+<input type="text" name="ct_dst_sport_ltm	" placeholder="ct_dst_sport_ltm	" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form><br><br>
+    
+    <p id="prediction_text">
+      {% if prediction_text == 1 %}
+        La prédiction est : Attack
+      {% elif prediction_text == 0 %}
+        La prédiction est : Normal
+      {% endif %}
+    </p>
+
+    <script>
+      // Ajoutez ce script pour mettre à jour la prédiction en fonction de prediction_text
+      const predictionText = document.getElementById('prediction_text');
+      const predictionValue = parseInt("{{ prediction_text }}");
+
+      if (predictionValue === 1) {
+        predictionText.innerText = " Attack";
+      } else if (predictionValue === 0) {
+        predictionText.innerText = " Normal";
+      }
+    </script>
+  
+ </div>
+
+
+</body>
+</html>

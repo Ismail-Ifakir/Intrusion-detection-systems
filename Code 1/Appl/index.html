@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Intrusion-Detection-System</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body>
+<h1 >Intrusion-Detection-System</h1>
+ <div  class="login" id="contact-form">
+
+     <br>
+     <br>
+     <b> Saisir les caractérisques du intrusion-detection pour connaitre sa classe: </b>
+ <br>
+     <br>
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post">
+<input type="text" name="duration" placeholder="duration" required="required" />
+<label>Protocol_type :</label>
+
+<select name="protocol_type" required="required" >
+  <option value="0">icmp</option>
+  <option value="1">tcp</option>
+  <option value="2">udp</option>
+</select>
+<br>
+<label>Service :</label>
+<select name="service" required="required" >
+  <option value="0">IRC</option>
+  <option value="1">X11</option>
+  <option value="2">Z39_50</option>
+  <option value="3">aol</option>
+  <option value="4">auth</option>
+  <option value="5">bgp</option>
+  <option value="6">courier</option>
+  <option value="7">csnet_ns</option>
+  <option value="8">ctf</option>
+  <option value="9">daytime</option>
+  <option value="10">discard</option>
+  <option value="11">domain</option>
+  <option value="12">domain_u</option>
+  <option value="13">echo</option>
+  <option value="14">eco_i</option>
+  <option value="15">ecr_i</option>
+  <option value="16">efs</option>
+  <option value="17">exec</option>
+  <option value="18">finger</option>
+  <option value="19">ftp</option>
+  <option value="20">ftp_data</option>
+  <option value="21">gopher</option>
+  <option value="22">harset</option>
+  <option value="23">hostname</option>
+  <option value="24">http</option>
+  <option value="25">http_2784</option>
+  <option value="26">http_443</option>
+  <option value="27">http_8001</option>
+  <option value="28">imap_4</option>
+  <option value="29">iso_tsap</option>
+  <option value="30">klogin</option>
+  <option value="31">kshell</option>
+  <option value="32">ldap</option>
+  <option value="33">link</option>
+  <option value="34">login</option>
+  <option value="35">mtp</option>
+  <option value="36">name</option>
+  <option value="37">netbios_dgm</option>
+  <option value="38">netbios_ns</option>
+  <option value="39">netbios_ssn</option>
+  <option value="40">netstat</option>
+  <option value="41">nnsp</option>
+  <option value="42">nntp</option>
+  <option value="43">ntp_u</option>
+  <option value="44">other</option>
+  <option value="45">pm_dump</option>
+  <option value="46">pop_2</option>
+  <option value="47">pop_3</option>
+  <option value="48">printer</option>
+  <option value="49">privat</option>
+  <option value="50">red_i</option>
+  <option value="51">remote_job</option>
+  <option value="52">rje</option>
+  <option value="53">shell</option>
+  <option value="54">smtp</option>
+  <option value="55">sql_net</option>
+  <option value="56">ssh</option>
+  <option value="57">sunrpc</option>
+  <option value="58">supdup</option>
+  <option value="59">susta</option>
+  <option value="60">telnet</option>
+  <option value="61">tftp_u</option>
+  <option value="62">time_e</option>
+  <option value="63">time</option>
+  <option value="64">urh_i</option>
+  <option value="65">urp_i</option>
+  <option value="66">uucp</option>
+  <option value="67">uucp_path</option>
+  <option value="68">vmnet</option>
+  <option value="69">whoils</option>
+</select>
+
+<label>Flag :</label>
+
+<select name="flag" required="required" >
+  <option value="0">SF</option>
+  <option value="1">S0</option>
+  <option value="2">REJ</option>
+  <option value="3">RSTR</option>
+  <option value="4">RSTO</option>
+  <option value="5">SH</option>
+  <option value="6">S1</option>
+  <option value="7">S2</option>
+  <option value="8">RSTOS0</option>
+  <option value="9">S3</option>
+  <option value="10">OTH</option>
+</select>
+
+<input type="text" name="src_bytes" placeholder="src_bytes" required="required" />
+<input type="text" name="dst_bytes" placeholder="dst_bytes" required="required" />
+<input type="text" name="hot" placeholder="hot" required="required" />
+<input type="text" name="num_failed_logins" placeholder="num_failed_logins" required="required" />
+<input type="text" name="logged_in" placeholder="logged_in" required="required" />
+<input type="text" name="count" placeholder="count" required="required" />
+<input type="text" name="srv_count" placeholder="srv_count" required="required" />
+<input type="text" name="dst_host_count" placeholder="dst_host_count" required="required" />
+<input type="text" name="dst_host_srv_count" placeholder="dst_host_srv_count" required="required" />
+<input type="text" name="dst_host_same_srv_rate" placeholder="dst_host_same_srv_rate" required="required" />
+<input type="text" name="dst_host_diff_srv_rate" placeholder="dst_host_diff_srv_rate" required="required" />
+<input type="text" name="dst_host_same_src_port_rate" placeholder="dst_host_same_src_port_rate" required="required" />
+<input type="text" name="dst_host_srv_diff_host_rate" placeholder="dst_host_srv_diff_host_rate" required="required" />
+<input type="text" name="dst_host_serror_rate" placeholder="dst_host_serror_rate" required="required" />
+<input type="text" name="dst_host_srv_serror_rate" placeholder="dst_host_srv_serror_rate" required="required" />
+<input type="text" name="dst_host_rerror_rate" placeholder="dst_host_rerror_rate" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form><br><br>
+    
+    <p id="prediction_text">
+      {% if prediction_text == 1 %}
+        La prédiction est : Attack
+      {% elif prediction_text == 0 %}
+        La prédiction est : Normal
+      {% endif %}
+    </p>
+
+    <script>
+      // Ajoutez ce script pour mettre à jour la prédiction en fonction de prediction_text
+      const predictionText = document.getElementById('prediction_text');
+      const predictionValue = parseInt("{{ prediction_text }}");
+
+      if (predictionValue === 1) {
+        predictionText.innerText = " Attack";
+      } else if (predictionValue === 0) {
+        predictionText.innerText = " Normal";
+      }
+    </script>
+  
+ </div>
+
+
+</body>
+</html>
